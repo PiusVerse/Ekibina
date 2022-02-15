@@ -19,7 +19,8 @@ const kTextFieldDecoration = InputDecoration(
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
   ),
   focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(color: Color.fromARGB(255, 51, 153, 255), width: 3.0),
+    borderSide:
+        BorderSide(color: Color.fromARGB(255, 51, 153, 255), width: 3.0),
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
   ),
 );
@@ -156,9 +157,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       if (_passController.text == _confPassController.text) {
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
-                                email: email, password: password);
+                                email: email.trim(), password: password);
                         if (newUser != null) {
-                          Navigator.pushNamed(context, 'setup_profile');
+                          Navigator.pushNamed(context, 'verify_email');
                         }
                       } else {
                         ScaffoldMessenger.of(context)

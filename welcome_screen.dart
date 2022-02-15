@@ -4,6 +4,8 @@ import 'custom_button.dart';
 import 'home_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -17,6 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void getCurrentUser() async {
+    late User loggedinUser;
     try {
       final user = await _auth.currentUser;
       if (user != null) {
@@ -30,7 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[800],
+        backgroundColor: Color.fromARGB(255, 28, 49, 76),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
@@ -41,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text(
                     'Welcome!',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 135, 206, 235),
                       fontSize: 72.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -51,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Text(
                     'to the eSacco app.',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 51, 153, 255),
                       fontSize: 20.0,
                       fontStyle: FontStyle.italic,
                     ),
@@ -66,6 +69,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   onPressed: () {
                     Navigator.pushNamed(context, 'login_screen');
                   },
+                ),
+                const SizedBox(
+                  height: 20.0,
+                  child: Center(
+                      child: Text(
+                    'Or',
+                    style: TextStyle(
+                        color: Colors.white, fontStyle: FontStyle.italic),
+                  )),
                 ),
                 RoundedButton(
                     colour: Colors.purple,
