@@ -47,9 +47,8 @@ class _RegisterKibiinaState extends State<RegisterKibiina> {
       locationController,
       memNumController;
   Color? buttonColor = Color.fromARGB(255, 28, 49, 76);
-  Color okayColor = Colors.white;
   Color confPasswordColor = Colors.white;
-  String _selectedYear = '----';
+  String _selectedYear = DateTime.now().year.toString();
 
   @override
   void initState() {
@@ -125,10 +124,6 @@ class _RegisterKibiinaState extends State<RegisterKibiina> {
                   style: TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                   decoration: kTextFieldDecoration.copyWith(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: okayColor, width: 1.0),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      ),
                       hintText: 'Enter the number of members'),
                   onChanged: (value) {
                     print(memNumController.value);
@@ -154,7 +149,6 @@ class _RegisterKibiinaState extends State<RegisterKibiina> {
                       ),
                     ),
                     items: <String>[
-                      '----',
                       '2022',
                       '2021',
                       '2020',
@@ -300,33 +294,19 @@ class _RegisterKibiinaState extends State<RegisterKibiina> {
                   colour: buttonColor,
                   title: 'Register Group',
                   onPressed: () async {
-                    if ((_selectedYear != '----') &&
-                        (int.parse(memNumController.text) >= 3)) {
-                      setState(() {
-                        showSpinner = true;
-                      });
-                      try {
-                        print(/*'required members: ' +*/ reqMembers);
-                        saveSaccoInfo(saccoInfoDao);
-                        Navigator.pushNamed(context, 'enroll_members');
-                      } catch (e) {
-                        print(e);
-                      }
-                      setState(() {
-                        showSpinner = false;
-                      });
-                    } else {
-                      if (int.parse(memNumController.text) < 3) {
-                        setState(() {
-                          okayColor = Colors.red;
-                        });
-                      }
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content:
-                            Text('Invalid year or [Number of members] below 3'),
-                        backgroundColor: Colors.red,
-                      ));
+                    setState(() {
+                      showSpinner = true;
+                    });
+                    try {
+                      print(/*'required members: ' +*/ reqMembers);
+                      saveSaccoInfo(saccoInfoDao);
+                      Navigator.pushNamed(context, 'enroll_members');
+                    } catch (e) {
+                      print(e);
                     }
+                    setState(() {
+                      showSpinner = false;
+                    });
                   },
                 )),
               ],
