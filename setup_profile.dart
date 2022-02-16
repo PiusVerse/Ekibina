@@ -170,6 +170,6 @@ class _SetupProfileState extends State<SetupProfile> {
       userId: userId as String,
     );
     print('saved info');
-    profileInfoDao.saveInfo(info, userId);
+    profileInfoDao.saveInfo(info, _ninController.text);
   }
 }
